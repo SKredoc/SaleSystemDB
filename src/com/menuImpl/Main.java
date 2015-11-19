@@ -1,11 +1,12 @@
-package com.menu;
+package com.menuImpl;
 
+import com.menu.Menu;
 import com.utility.Util;
 
 /**
  * Created by wong on 11/19/15.
  */
-public class Main implements Menu{
+public class Main implements Menu {
     public static final int administrator = 1;
     public static final int salesPerson = 2;
     public static final int manager = 3;
