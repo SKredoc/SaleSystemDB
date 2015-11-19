@@ -14,7 +14,6 @@ import java.nio.Buffer;
 public class CSCI3170Proj {
     public static void init(){
         System.out.println("Welcome to sales system!");
-        System.out.println("");
     }
 
     public static void main(String args[]){

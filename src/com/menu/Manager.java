@@ -10,7 +10,7 @@ import java.util.Scanner;
  */
 public class Manager implements Menu {
     public static final int showSalesRecord = 1;
-    public static final int showSalesValue = 2;
+    public static final int showTotalValue = 2;
     public static final int showPopularPart = 3;
     public static final int returnToMain = 4;
 
@@ -20,24 +20,26 @@ public class Manager implements Menu {
 
     @Override
     public void printOperationMenu(){
+        System.out.println("-----Operations for manager menu-----");
         System.out.println("What kinds of operation would you like to perform?");
         System.out.println("1. Show the sales record of a salesperson within a period");
         System.out.println("2. Show the total sales value of each manufacturer");
         System.out.println("3. Show the N most popular part");
         System.out.println("4. Return to the main menu");
-        System.out.println("Enter Your Choice: ");
+        System.out.print("Enter Your Choice: ");
     }
 
     @Override
     public void mainOperation(Menu instance) {
         while(true){
+            System.out.println();
             instance.printOperationMenu();
             switch (Util.getChoice()){
                 case showSalesRecord:
-                    instance.showSalesRecord();
-                    break;
-                case showSalesValue:
                     showSalesRecord();
+                    break;
+                case showTotalValue:
+                    showTotalValue();
                     break;
                 case showPopularPart:
                     showPopularPart();
@@ -53,7 +55,7 @@ public class Manager implements Menu {
     public void showSalesRecord(){
         Scanner input = new Scanner(System.in);
         System.out.print("Enter The Salesperson ID: ");
-        this.sID = input.nextInt();
+        this.sID = Util.getChoice();
 
         System.out.print("Type in the starting date [dd/mm/yyyy]: ");
         String startDate = input.nextLine();
@@ -66,14 +68,22 @@ public class Manager implements Menu {
         System.out.println("Transcation Record:");
         //TODO show sales record
 
+        System.out.println("End of Query");
     }
 
-    public void showSalesValue(){
-
+    public void showTotalValue(){
+        System.out.println("| Manufacturer ID | Manufacturer Name | Total Sales Value|");
+        //TODO show the total sale value
+        System.out.println("End of Query");
     }
 
     public void showPopularPart(){
-
+        System.out.print("Type in the number of parts: ");
+        int N = Util.getChoice();
+        System.out.println("N is " + N);
+        System.out.println("| Part ID | Part Name | No. of Transcation");
+        //TODO show the N most popular part
+        System.out.println("End of Query");
     }
 
 }

@@ -16,19 +16,20 @@ public class Administrator implements Menu{
 
     @Override
     public void printOperationMenu(){
-        System.out.println("----Operations for administrator menu----");
+        System.out.println("-----Operations for administrator menu-----");
         System.out.println("What kinds of operation would you like to perform?");
         System.out.println("1. Create all tables");
         System.out.println("2. Delete all tables");
         System.out.println("3. Load from datafile");
         System.out.println("4. Show number of records in each table");
         System.out.println("5. Return to the main menu");
-        System.out.println("Enter Your Choice: ");
+        System.out.print("Enter Your Choice: ");
     }
 
     @Override
     public void mainOperation(Menu instance){
         while(true){
+            System.out.println();
             instance.printOperationMenu();
             switch(Util.getChoice()){
                 case createAllTable:
@@ -52,19 +53,19 @@ public class Administrator implements Menu{
 
     }
 
-    public static void createAllTable(){
+    public void createAllTable(){
         System.out.print("Processing...");
         //TODO create all table
         System.out.println("Done! Database is initialized!");
     }
 
-    public static void deleteAllTable(){
+    public void deleteAllTable(){
         System.out.print("Processing...");
         //TODO delete all table
         System.out.println("Done! Database is removed!");
     }
 
-    public static void loadFromDataFile(){
+    public void loadFromDataFile(){
         Scanner input = new Scanner(System.in);
         System.out.print("Type in the Source Data Folder Path: ");
         String path = input.nextLine();
@@ -73,7 +74,7 @@ public class Administrator implements Menu{
         System.out.println("Done! Data is inputted to the database!");
     }
 
-    public static void showNumberOfRecord() {
+    public void showNumberOfRecord() {
         System.out.println("Number of records in each table:");
         //TODO show number of record
     }

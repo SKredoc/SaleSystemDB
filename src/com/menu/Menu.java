@@ -13,4 +13,5 @@ public interface Menu {
      * operation control
      */
     void mainOperation(Menu instance);
+
 }

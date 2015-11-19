@@ -13,18 +13,19 @@ public class Main implements Menu{
 
     @Override
     public void printOperationMenu() {
-        System.out.println("----Main menu----");
+        System.out.println("-----Main menu-----");
         System.out.println("What kinds of operation would you like to perform?");
         System.out.println("1. Operations for administrator");
         System.out.println("2. Operations for salesperson");
         System.out.println("3. Operations for manager");
         System.out.println("4. Exit this program");
-        System.out.println("Enter Your Choice: ");
+        System.out.print("Enter Your Choice: ");
     }
 
     @Override
     public void mainOperation(Menu instance) {
         while(true){
+            System.out.println();
             instance.printOperationMenu();
             switch (Util.getChoice()){
                 case Main.administrator:
