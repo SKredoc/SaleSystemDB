@@ -1,5 +1,3 @@
-package com.connection.test;
-
 import java.io.*;
 import java.sql.Date;
 import java.text.ParseException;

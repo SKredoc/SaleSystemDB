@@ -1,4 +1,4 @@
-import com.menuImpl.Main;
+import com.menuImpl.MainMenu;
 
 /**
  * Created by wong on 11/19/15.
@@ -12,7 +12,7 @@ public class CSCI3170Proj {
     public static void main(String args[]){
         init();
         //TODO connect to jdbc;
-        Main instance = new Main();
+        MainMenu instance = new MainMenu();
         instance.mainOperation(instance);
     }
 

@@ -3,16 +3,18 @@ package com.menuImpl;
 import com.connection.ConnectionManager;
 import com.constants.Constants;
 import com.menu.Menu;
+import com.operation.AdministrationOperation;
 import com.utility.Util;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
  * Created by wong on 11/19/15.
  */
-public class Administrator implements Menu {
+public class AdministratorMenu implements Menu {
     public static final int createAllTable = 1;
     public static final int deleteAllTable = 2;
     public static final int loadFromDataFile = 3;
@@ -59,17 +61,13 @@ public class Administrator implements Menu {
 
     public void createAllTable(){
         System.out.print("Processing...");
-        ConnectionManager cm = new ConnectionManager();
-        cm.createAllTable();
-        cm.closeConnection();
+        AdministrationOperation.createAllTable();
         System.out.println("Done! Database is initialized!");
     }
 
     public void deleteAllTable(){
         System.out.print("Processing...");
-        ConnectionManager cm = new ConnectionManager();
-        cm.deleteAllTable();
-        cm.closeConnection();
+        AdministrationOperation.deleteAllTable();
         System.out.println("Done! Database is removed!");
     }
 
@@ -78,58 +76,18 @@ public class Administrator implements Menu {
         System.out.print("Type in the Source Data Folder Path: ");
         String folderPath = input.nextLine();
         System.out.print("Processing...");
-        ConnectionManager cm = new ConnectionManager();
-        cm.loadDataFromFile(folderPath);
-        cm.closeConnection();
+        AdministrationOperation.loadDataFromFile(folderPath);
         System.out.println("Done! Data is inputted to the database!");
     }
 
     public void showNumberOfRecord() {
         System.out.println("Number of records in each table:");
-        int cNum = 0;
-        int mNum = 0;
-        int pNum = 0;
-        int sNum = 0;
-        int tNum = 0;
-        ResultSet rs = null;
-        ConnectionManager cm = new ConnectionManager();
-
-
-        try {
-            rs = cm.getQueryResult("SELECT COUNT(*) AS rowcount FROM Category");
-            rs.next();
-            cNum = rs.getInt("rowcount");
-            rs.close();
-
-            rs = cm.getQueryResult("SELECT COUNT(*) AS rowcount FROM Manufacturer");
-            rs.next();
-            mNum = rs.getInt("rowcount");
-            rs.close();
-
-            rs = cm.getQueryResult("SELECT COUNT(*) AS rowcount FROM Part");
-            rs.next();
-            pNum = rs.getInt("rowcount");
-            rs.close();
-
-            rs = cm.getQueryResult("SELECT COUNT(*) AS rowcount FROM SalesPerson");
-            rs.next();
-            sNum = rs.getInt("rowcount");
-            rs.close();
-
-            rs = cm.getQueryResult("SELECT COUNT(*) AS rowcount FROM Transaction");
-            rs.next();
-            tNum = rs.getInt("rowcount");
-            rs.close();
-        } catch (SQLException e) {
-            System.out.println("Fail to count the number of each table");
-        }
-        cm.closeConnection();
-
-        System.out.println("category: " + cNum);
-        System.out.println("manufacturer: " + mNum);
-        System.out.println("part: " + pNum);
-        System.out.println("salesperson: " + sNum);
-        System.out.println("transaction: " + tNum);
+        HashMap<String,Integer> map = AdministrationOperation.showNumberOfRecord();
+        System.out.println("category: " + map.get(Constants.TABLE_Category));
+        System.out.println("manufacturer: " + map.get(Constants.TABLE_Manufacturer));
+        System.out.println("part: " + map.get(Constants.TABLE_Part));
+        System.out.println("salesperson: " + map.get(Constants.TABLE_SalesPerson));
+        System.out.println("transaction: " + map.get(Constants.TABLE_Transaction));
 
     }
 

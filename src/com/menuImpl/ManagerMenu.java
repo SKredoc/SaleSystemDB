@@ -9,7 +9,7 @@ import java.util.Scanner;
 /**
  * Created by wong on 11/19/15.
  */
-public class Manager implements Menu {
+public class ManagerMenu implements Menu {
     public static final int showSalesRecord = 1;
     public static final int showTotalValue = 2;
     public static final int showPopularPart = 3;
