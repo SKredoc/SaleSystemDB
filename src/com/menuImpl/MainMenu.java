@@ -1,11 +1,12 @@
-package com.menu;
+package com.menuImpl;
 
+import com.menu.Menu;
 import com.utility.Util;
 
 /**
  * Created by wong on 11/19/15.
  */
-public class Main implements Menu{
+public class MainMenu implements Menu {
     public static final int administrator = 1;
     public static final int salesPerson = 2;
     public static final int manager = 3;
@@ -13,7 +14,8 @@ public class Main implements Menu{
 
     @Override
     public void printOperationMenu() {
-        System.out.println("-----Main menu-----");
+        System.out.println();
+        System.out.println("-----MainMenu menu-----");
         System.out.println("What kinds of operation would you like to perform?");
         System.out.println("1. Operations for administrator");
         System.out.println("2. Operations for salesperson");
@@ -25,22 +27,21 @@ public class Main implements Menu{
     @Override
     public void mainOperation(Menu instance) {
         while(true){
-            System.out.println();
             instance.printOperationMenu();
             switch (Util.getChoice()){
-                case Main.administrator:
-                    Administrator admin = new Administrator();
+                case MainMenu.administrator:
+                    AdministratorMenu admin = new AdministratorMenu();
                     admin.mainOperation(admin);
                     break;
-                case Main.salesPerson:
-                    SalesPerson salesPerson = new SalesPerson();
+                case MainMenu.salesPerson:
+                    SalesPersonMenu salesPerson = new SalesPersonMenu();
                     salesPerson.mainOperation(salesPerson);
                     break;
-                case Main.manager:
-                    Manager manager = new Manager();
+                case MainMenu.manager:
+                    ManagerMenu manager = new ManagerMenu();
                     manager.mainOperation(manager);
                     break;
-                case Main.exit:
+                case MainMenu.exit:
                     return;
                 default:
                     System.out.println("No this choice. Please input again");

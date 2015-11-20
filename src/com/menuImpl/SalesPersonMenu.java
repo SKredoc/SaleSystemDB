@@ -1,13 +1,18 @@
-package com.menu;
+package com.menuImpl;
 
+import com.connection.ConnectionManager;
+import com.menu.Menu;
+import com.operation.SalesPersonOperation;
 import com.utility.Util;
 
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Scanner;
 
 /**
  * Created by wong on 11/19/15.
  */
-public class SalesPerson implements Menu {
+public class SalesPersonMenu implements Menu {
     public static final int searchForParts = 1;
     public static final int sellAParts = 2;
     public static final int returnToMainMenu = 3;
@@ -27,6 +32,7 @@ public class SalesPerson implements Menu {
 
     @Override
     public void printOperationMenu() {
+        System.out.println();
         System.out.println("-----Operations for salesperson menu-----");
         System.out.println("What kinds of operation would you like to perform?");
         System.out.println("1. Search for parts");
@@ -38,7 +44,6 @@ public class SalesPerson implements Menu {
     @Override
     public void mainOperation(Menu instance) {
         while (true) {
-            System.out.println();
             instance.printOperationMenu();
             switch (Util.getChoice()) {
                 case searchForParts:
@@ -76,9 +81,7 @@ public class SalesPerson implements Menu {
         this.pID = Util.getChoice();
         System.out.print("Enter The Salesperson ID: ");
         this.sID = Util.getChoice();
-        /* TODO If the part is available, it is then sold and the database is updated accordingly.
-                 * TODO Finally there should be an informative message on remaining available quantity of the part sold.
-                 * TODO If the part cannot be sold, an error message should be shown.*/
+        SalesPersonOperation.sellAPart(this.pID, this.sID);
     }
 
     public void searchPartName() {
@@ -87,14 +90,15 @@ public class SalesPerson implements Menu {
             Scanner scanner = new Scanner(System.in);
             this.partName = scanner.nextLine();
             printOrderingMenu();
+            String pattern = null;
             switch (Util.getChoice()) {
                 case byPriceASCE:
-                    //TODO print the query result in asec order
-                    System.out.println("End of Query");
+                    pattern = "P.pName LIKE '_%" + this.partName +"_%' ";
+                    SalesPersonOperation.search(pattern, "ASC");
                     return;
                 case byPriceDESC:
-                    //TODO print the query result in desc order
-                    System.out.println("End of Query");
+                    pattern = "P.pName LIKE '_%" + this.partName +"_%' ";
+                    SalesPersonOperation.search(pattern, "DESC");
                     return;
                 default:
                     System.out.println("No this choice. Please enter again.");
@@ -108,14 +112,15 @@ public class SalesPerson implements Menu {
             Scanner scanner = new Scanner(System.in);
             this.manuName = scanner.nextLine();
             printOrderingMenu();
+            String pattern = null;
             switch (Util.getChoice()) {
                 case byPriceASCE:
-                    //TODO print the query result in asec order
-                    System.out.println("End of Query");
+                    pattern = "M.mName LIKE '_%" + this.manuName +"_%' ";
+                    SalesPersonOperation.search(pattern, "ASC");
                     return;
                 case byPriceDESC:
-                    //TODO print the query result in desc order
-                    System.out.println("End of Query");
+                    pattern = "M.mName LIKE '_%" + this.manuName +"_%' ";
+                    SalesPersonOperation.search(pattern, "DESC");
                     return;
                 default:
                     System.out.println("No this choice. Please enter again.");

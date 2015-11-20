@@ -1,5 +1,6 @@
-package com.menu;
+package com.menuImpl;
 
+import com.menu.Menu;
 import com.utility.Util;
 
 import java.sql.Date;
@@ -8,7 +9,7 @@ import java.util.Scanner;
 /**
  * Created by wong on 11/19/15.
  */
-public class Manager implements Menu {
+public class ManagerMenu implements Menu {
     public static final int showSalesRecord = 1;
     public static final int showTotalValue = 2;
     public static final int showPopularPart = 3;
@@ -20,6 +21,7 @@ public class Manager implements Menu {
 
     @Override
     public void printOperationMenu(){
+        System.out.println();
         System.out.println("-----Operations for manager menu-----");
         System.out.println("What kinds of operation would you like to perform?");
         System.out.println("1. Show the sales record of a salesperson within a period");
@@ -32,7 +34,6 @@ public class Manager implements Menu {
     @Override
     public void mainOperation(Menu instance) {
         while(true){
-            System.out.println();
             instance.printOperationMenu();
             switch (Util.getChoice()){
                 case showSalesRecord:
