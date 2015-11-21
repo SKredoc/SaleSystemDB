@@ -61,14 +61,18 @@ public class AdministratorMenu implements Menu {
 
     public void createAllTable(){
         System.out.print("Processing...");
-        AdministrationOperation.createAllTable();
-        System.out.println("Done! Database is initialized!");
+        if(AdministrationOperation.createAllTable()==0)
+            System.out.println("Done! Database is initialized!");
+        else
+            System.out.println("Some tables are already created");
     }
 
     public void deleteAllTable(){
         System.out.print("Processing...");
-        AdministrationOperation.deleteAllTable();
-        System.out.println("Done! Database is removed!");
+        if(AdministrationOperation.deleteAllTable()==0)
+            System.out.println("Done! Database is removed!");
+        else
+            System.out.println("Some tables are already removed");
     }
 
     public void loadFromDataFile(){
@@ -81,13 +85,13 @@ public class AdministratorMenu implements Menu {
     }
 
     public void showNumberOfRecord() {
-        System.out.println("Number of records in each table:");
         HashMap<String,Integer> map = AdministrationOperation.showNumberOfRecord();
-        System.out.println("category: " + map.get(Constants.TABLE_Category));
-        System.out.println("manufacturer: " + map.get(Constants.TABLE_Manufacturer));
-        System.out.println("part: " + map.get(Constants.TABLE_Part));
-        System.out.println("salesperson: " + map.get(Constants.TABLE_SalesPerson));
-        System.out.println("transaction: " + map.get(Constants.TABLE_Transaction));
+        System.out.println("Number of records in each table:");
+        System.out.println("category: " + (map.get(Constants.TABLE_Category)==null? "NOT EXIST":map.get(Constants.TABLE_Category)));
+        System.out.println("manufacturer: " + (map.get(Constants.TABLE_Manufacturer)==null? "NOT EXIST":map.get(Constants.TABLE_Manufacturer)));
+        System.out.println("part: " + (map.get(Constants.TABLE_Part)==null? "NOT EXIST":map.get(Constants.TABLE_Part)));
+        System.out.println("salesperson: " + (map.get(Constants.TABLE_SalesPerson)==null? "NOT EXIST":map.get(Constants.TABLE_SalesPerson)));
+        System.out.println("transaction: " + (map.get(Constants.TABLE_Transaction)==null? "NOT EXIST":map.get(Constants.TABLE_Transaction)));
 
     }
 

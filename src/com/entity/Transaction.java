@@ -9,9 +9,9 @@ public class Transaction {
     private int tID;
     private int pID;
     private int sID;
-    private Date date;
+    private String date;
 
-    public Transaction(int tID, int pID, int sID, Date date) {
+    public Transaction(int tID, int pID, int sID, String date) {
         this.tID = tID;
         this.pID = pID;
         this.sID = sID;
@@ -42,11 +42,11 @@ public class Transaction {
         this.sID = sID;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 }

@@ -93,11 +93,11 @@ public class SalesPersonMenu implements Menu {
             String pattern = null;
             switch (Util.getChoice()) {
                 case byPriceASCE:
-                    pattern = "P.pName LIKE '_%" + this.partName +"_%' ";
+                    pattern = "P.pName LIKE '%" + this.partName +"%' ";
                     SalesPersonOperation.search(pattern, "ASC");
                     return;
                 case byPriceDESC:
-                    pattern = "P.pName LIKE '_%" + this.partName +"_%' ";
+                    pattern = "P.pName LIKE '%" + this.partName +"%' ";
                     SalesPersonOperation.search(pattern, "DESC");
                     return;
                 default:
@@ -115,11 +115,11 @@ public class SalesPersonMenu implements Menu {
             String pattern = null;
             switch (Util.getChoice()) {
                 case byPriceASCE:
-                    pattern = "M.mName LIKE '_%" + this.manuName +"_%' ";
+                    pattern = "M.mName LIKE '%" + this.manuName +"%' ";
                     SalesPersonOperation.search(pattern, "ASC");
                     return;
                 case byPriceDESC:
-                    pattern = "M.mName LIKE '_%" + this.manuName +"_%' ";
+                    pattern = "M.mName LIKE '%" + this.manuName +"%' ";
                     SalesPersonOperation.search(pattern, "DESC");
                     return;
                 default:

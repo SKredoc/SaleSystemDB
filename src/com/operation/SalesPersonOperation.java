@@ -11,40 +11,42 @@ import java.sql.SQLException;
  */
 public class SalesPersonOperation {
     public static void sellAPart(int pID, int sID){
-        System.out.println("SalesPersonOperation.sellAPart#start - pID=["+pID+"], sID=["+sID+"]");
         ConnectionManager cm = null;
         ResultSet rs = null;
 
         cm = new ConnectionManager();
         rs = cm.getQueryResult("SELECT P.pName, P.pAvailableQuantity FROM Part P WHERE P.pID = " + pID);
+        if(rs == null){
+            System.out.println("pID or sID is invalid. The part cannot be sold");
+            return;
+        }
         try {
             rs.next();
             String pName = rs.getString("pName");
             int pQuantity = rs.getInt("pAvailableQuantity");
             rs.close();
             if(pQuantity > 0){
-                System.out.println("Product: " + pName + "(id: " + pID + ") Remaining Quality: " + (pQuantity-1));
-                int maxtID = 0; //TODO is the tID increase in ascending order?
+                int maxtID = 0;
                 rs = cm.getQueryResult("SELECT MAX(T.tID) FROM Transaction T");
+                if(rs == null) return;
                 rs.next();
                 maxtID =  rs.getInt(1);
                 rs.close();
-                System.out.println("The maximum of tid is " + maxtID); //TODO delete
+                //TODO :: Is the tID increase accordingly?
                 cm.updateQuery("INSERT INTO Transaction VALUES (" + (maxtID+1) + "," + pID + "," + sID + "," + "TO_DATE('"+Util.getCurrentDate()+"', 'DD/MM/YYYY')" + ")");
                 cm.updateQuery("UPDATE Part SET pAvailableQuantity="+(pQuantity-1)+" WHERE pID="+pID);
+                System.out.println("Product: " + pName + "(id: " + pID + ") Remaining Quality: " + (pQuantity-1));
+
             }
             else{
-                System.out.println("Error: Not enough Quality of Product: " + pName);
+                System.out.println("Error: Not enough Quality of Product: " + pName +". The part cannot be sold");
             }
         } catch (SQLException e) {
-            e.printStackTrace();
         }
         cm.closeConnection();
-        System.out.println("SalesPersonOperation.sellAPart#end");
     }
 
     public static void search(String pattern, String order){
-        System.out.println("SalesPersonOperation.search#start - pattern=["+pattern+"] order=["+order+"]");
         ConnectionManager cm;
         ResultSet rs;
 
@@ -70,7 +72,6 @@ public class SalesPersonOperation {
         }
         cm.closeConnection();
         System.out.println("End of Query");
-        System.out.println("SalesPersonOperation.search#end");
     }
 
 }

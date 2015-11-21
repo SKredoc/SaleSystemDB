@@ -88,7 +88,6 @@ public class Util {
                 if(splitStr.length == 5){
                     mID = Integer.parseInt(splitStr[0]);
                     mName = splitStr[1];
-                    System.out.println(mName);
                     mAddress = splitStr[2];
                     mPhoneNumber = Integer.parseInt(splitStr[3]);
                     mWarrantyPeriod = Integer.parseInt(splitStr[4]);
@@ -178,7 +177,7 @@ public class Util {
         int tID;
         int pID;
         int sID;
-        Date date;
+        String date;
         try {
             line = br.readLine();
             while(line != null){
@@ -187,7 +186,7 @@ public class Util {
                     tID = Integer.parseInt(splitStr[0]);
                     pID = Integer.parseInt(splitStr[1]);
                     sID = Integer.parseInt(splitStr[2]);
-                    date = Util.parseDate(splitStr[3]);
+                    date = splitStr[3];
                     transactionList.add(new Transaction(tID, pID, sID, date));
                 }
                 line = br.readLine();
@@ -199,16 +198,17 @@ public class Util {
         return transactionList;
     }
 
-    public static Date parseDate(String dateStr){
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        java.util.Date parsed = null;
+    public static String changeDateFormat(String dateStr){
+        SimpleDateFormat old_format = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat new_format = new SimpleDateFormat("dd/MM/yyyy");
+
         try {
-            parsed =  format.parse(dateStr);
+            return new_format.format(old_format.parse(dateStr));
         } catch (ParseException e) {
-            System.out.println("Fail to parseDate");
+            System.out.println("Fail to change the format of date");
+            return "";
         }
-        java.sql.Date date = new java.sql.Date(parsed.getTime());
-        return date;
+
     }
 
     public static String getCurrentDate(){
@@ -216,4 +216,9 @@ public class Util {
         java.util.Date date = new java.util.Date();
         return format.format(date);
     }
+
+    public static String padLeft(String s, int n) {
+        return String.format("%1$" + n + "s", s);
+    }
+
 }

@@ -48,7 +48,7 @@ public class AdministrationOperation {
                     "sID NUMBER(2), " +
                     "tDate DATE, " +
                     "FOREIGN KEY (pID) REFERENCES Part (pID) ON DELETE CASCADE, " +
-                    "FOREIGN KEY (sID) REFERENCES SalesPerson (sID) ON DELETE CASCADE" +
+                    "FOREIGN KEY (sID) REFERENCES SalesPerson (sID) ON DELETE CASCADE " +
                     ")"
     };
 
@@ -66,58 +66,58 @@ public class AdministrationOperation {
     public static String SQLInsertToSalePerson = "INSERT INTO SalesPerson VALUES (?,?,?,?)";
     public static String SQLInsertToTransaction = "INSERT INTO Transaction VALUES (?,?,?,?)";
 
-    public static void createAllTable(){
-        System.out.println("AdministrationOperation.createAllTable#start");
+    public static int createAllTable(){
         ConnectionManager cm = new ConnectionManager();
-        cm.updateQueryList(SQLCreateAllTable);
+        int f = cm.updateQueryList(SQLCreateAllTable);
         cm.closeConnection();
-        System.out.println("AdministrationOperation.createAllTable#end");
+        return f;
     }
 
-    public static void deleteAllTable(){
-        System.out.println("AdministrationOperation.deleteAllTable#start");
+    public static int deleteAllTable(){
         ConnectionManager cm = new ConnectionManager();
-        cm.updateQueryList(SQLDeleteAllTable);
+        int f = cm.updateQueryList(SQLDeleteAllTable);
         cm.closeConnection();
-        System.out.println("AdministrationOperation.deleteAllTable#end");
+        return f;
     }
 
     public static void loadDataFromFile(String folderPath){
-        System.out.println("AdministrationOperation.loadDataFromFile#start - folderPath=["+folderPath+"]");
         ConnectionManager cm = new ConnectionManager();
         cm.loadDataFromFile(folderPath);
         cm.closeConnection();
-        System.out.println("AdministrationOperation.loadDataFromFile#end");
     }
 
     public static HashMap<String,Integer> showNumberOfRecord(){
-        System.out.println("AdministrationOperation.showNumberOfRecord#start");
         HashMap<String,Integer> map = new HashMap<String,Integer>();
         ResultSet rs = null;
         ConnectionManager cm = new ConnectionManager();
 
         try {
             rs = cm.getQueryResult("SELECT COUNT(*) FROM Category");
+            if(rs == null) return map;
             rs.next();
             map.put(Constants.TABLE_Category, rs.getInt(1));
             rs.close();
 
             rs = cm.getQueryResult("SELECT COUNT(*) FROM Manufacturer");
+            if(rs == null) return map;
             rs.next();
             map.put(Constants.TABLE_Manufacturer, rs.getInt(1));
             rs.close();
 
             rs = cm.getQueryResult("SELECT COUNT(*) FROM Part");
+            if(rs == null) return map;
             rs.next();
             map.put(Constants.TABLE_Part, rs.getInt(1));
             rs.close();
 
             rs = cm.getQueryResult("SELECT COUNT(*) FROM SalesPerson");
+            if(rs == null) return map;
             rs.next();
             map.put(Constants.TABLE_SalesPerson, rs.getInt(1));
             rs.close();
 
             rs = cm.getQueryResult("SELECT COUNT(*) FROM Transaction");
+            if(rs == null) return map;
             rs.next();
             map.put(Constants.TABLE_Transaction, rs.getInt(1));
             rs.close();
@@ -126,7 +126,6 @@ public class AdministrationOperation {
         }
 
         cm.closeConnection();
-        System.out.println("AdministrationOperation.showNumberOfRecord#end - mapSize=["+map.size()+"]");
         return map;
     }
 }

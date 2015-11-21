@@ -1,6 +1,7 @@
 package com.menuImpl;
 
 import com.menu.Menu;
+import com.operation.ManagerOperation;
 import com.utility.Util;
 
 import java.sql.Date;
@@ -60,30 +61,27 @@ public class ManagerMenu implements Menu {
 
         System.out.print("Type in the starting date [dd/mm/yyyy]: ");
         String startDate = input.nextLine();
-        //TODO change date to Date format
 
         System.out.print("Type in the ending date [dd/mm/yyyy]: ");
         String endDate = input.nextLine();
-        //TODO change date to Date format
 
         System.out.println("Transcation Record:");
-        //TODO show sales record
+        ManagerOperation.showSalesRecord(this.sID, startDate, endDate);
 
         System.out.println("End of Query");
     }
 
     public void showTotalValue(){
-        System.out.println("| Manufacturer ID | Manufacturer Name | Total Sales Value|");
-        //TODO show the total sale value
+        System.out.println("| Manufacturer ID | Manufacturer Name | Total Sales Value |");
+        ManagerOperation.showTotalSales();
         System.out.println("End of Query");
     }
 
     public void showPopularPart(){
         System.out.print("Type in the number of parts: ");
         int N = Util.getChoice();
-        System.out.println("N is " + N);
-        System.out.println("| Part ID | Part Name | No. of Transcation");
-        //TODO show the N most popular part
+        System.out.println("| Part ID | Part Name | No. of Transaction |");
+        ManagerOperation.showPopularPart(N);
         System.out.println("End of Query");
     }
 
