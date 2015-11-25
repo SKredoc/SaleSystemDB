@@ -118,7 +118,7 @@ public class ConnectionManager {
             if(pList != null){
             for(Part p : pList){
                 pstmt.setString(1, Integer.toString(p.getpID()));
-                pstmt.setString(2, "'"+p.getpName()+"'");
+                pstmt.setString(2, p.getpName());
                 pstmt.setString(3, Integer.toString(p.getpPrice()));
                 pstmt.setString(4, Integer.toString(p.getmID()));
                 pstmt.setString(5, Integer.toString(p.getcID()));

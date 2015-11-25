@@ -15,8 +15,8 @@ public class MainMenu implements Menu {
     public static final int salesPerson = 2;
     public static final int manager = 3;
     public static final int exit = 4;
-    public static final int viewAllTable = 5;
 
+    public static final int viewAllTable = 5;
     @Override
     public void printOperationMenu() {
         System.out.println();
@@ -26,7 +26,6 @@ public class MainMenu implements Menu {
         System.out.println("2. Operations for salesperson");
         System.out.println("3. Operations for manager");
         System.out.println("4. Exit this program");
-        System.out.println("5. View All Table");
         System.out.print("Enter Your Choice: ");
     }
 
@@ -49,13 +48,13 @@ public class MainMenu implements Menu {
                     break;
                 case MainMenu.exit:
                     return;
-                case MainMenu.viewAllTable:
-                    try {
-                        MainMenu.viewAllTable();
-                    } catch (SQLException e) {
-                        e.printStackTrace();
-                    }
-                    break;
+                //case MainMenu.viewAllTable:
+                //    try {
+                //        MainMenu.viewAllTable();
+                //    } catch (SQLException e) {
+                //       e.printStackTrace();
+                //    }
+                //    break;
                 default:
                     System.out.println("No this choice. Please input again");
             }
@@ -109,4 +108,6 @@ public class MainMenu implements Menu {
 
         cm.closeConnection();
     }
+
+
 }
