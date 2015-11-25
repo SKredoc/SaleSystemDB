@@ -65,7 +65,7 @@ public class ManagerMenu implements Menu {
         System.out.print("Type in the ending date [dd/mm/yyyy]: ");
         String endDate = input.nextLine();
 
-        System.out.println("Transcation Record:");
+        System.out.println("Transaction Record:");
         ManagerOperation.showSalesRecord(this.sID, startDate, endDate);
 
         System.out.println("End of Query");

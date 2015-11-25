@@ -20,7 +20,7 @@ public class MainMenu implements Menu {
     @Override
     public void printOperationMenu() {
         System.out.println();
-        System.out.println("-----MainMenu menu-----");
+        System.out.println("-----Main menu-----");
         System.out.println("What kinds of operation would you like to perform?");
         System.out.println("1. Operations for administrator");
         System.out.println("2. Operations for salesperson");
